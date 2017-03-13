@@ -5,6 +5,27 @@
  */
 
 import React, { Component } from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import reducer from './app/reducers'
+
+// middleware that logs actions
+const loggerMiddleware = createLogger({ predicate: (getState, action) => __DEV__  });
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      thunkMiddleware, // lets us dispatch() functions
+      loggerMiddleware,
+    ),
+  );
+  return createStore(reducer, initialState, enhancer);
+}
+
+const store = configureStore({});
+
 import {
   AppRegistry,
   StyleSheet,
@@ -12,19 +33,12 @@ import {
   View
 } from 'react-native';
 
-export default class ReactNativeGoodreadsLogin extends Component {
+class ReactNativeGoodreadsLogin extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Welcome to React Native Good Reads!
         </Text>
       </View>
     );
@@ -43,11 +57,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
 });
 
-AppRegistry.registerComponent('ReactNativeGoodreadsLogin', () => ReactNativeGoodreadsLogin);
+const App = () => (
+  <Provider store={store}>
+    <ReactNativeGoodreadsLogin />
+  </Provider>
+)
+
+AppRegistry.registerComponent('ReactNativeGoodreadsLogin', () => App);
