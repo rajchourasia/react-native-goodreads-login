@@ -1,6 +1,10 @@
 import createReducer from '../lib/createReducer'
 import * as types from '../actions/types'
 
-export const loggedInUser = createReducer({}, {
-
+export const user = createReducer({
+  initialiased: false,
+}, {
+  [types.SET_AUTHENTICATED_USER](state, action) {
+    return Object.assign({}, state, action.user)
+  }
 });
