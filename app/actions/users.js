@@ -60,3 +60,10 @@ export function authenticateUser() {
       .then(() => dispatch(getAuthenticatedUser()))
       .catch(err => console.log(err));
 }
+
+export function signOut() {
+  return (dispatch) =>
+    dispatch({
+      type: types.SIGN_OUT,
+    });
+}

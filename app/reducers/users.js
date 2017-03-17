@@ -7,4 +7,9 @@ export const user = createReducer({
   [types.SET_AUTHENTICATED_USER](state, action) {
     return Object.assign({}, state, action.user);
   },
+  [types.SIGN_OUT]() {
+    return Object.assign({}, {
+      initialiased: true,
+    });
+  },
 });
