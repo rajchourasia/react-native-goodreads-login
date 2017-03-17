@@ -42,10 +42,11 @@ const UserInfo = (props) => {
   && props.user.image.default ? props.user.image.default : '';
   return (
     <View style={styles.container}>
-      <Image
+      { imageUri !== '' && <Image
         source={{ uri: imageUri }}
         style={styles.profilePicture}
       />
+      }
       <Text style={styles.name}>
         Welcome {props.user ? props.user.name : null}
       </Text>
