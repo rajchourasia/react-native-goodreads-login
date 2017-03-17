@@ -26,7 +26,7 @@ There is provision of adding any other OAuth service but it did not work correct
 
 [redux-logger](https://github.com/evgenyrodionov/redux-logger) is used log action calls and state in development mode.
 
-## Example
+## Demo
 ![Demo gif](https://github.com/rajchourasia/react-native-goodreads-login/blob/master/static/demo.gif)
 
 ## Notes
