@@ -1,13 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../actions'
-import LoginScreen from './LoginScreen'
+import { bindActionCreators } from 'redux';
+import { View } from 'react-native';
+import { ActionCreators } from '../actions';
+import LoginScreen from './LoginScreen';
 import UserInfo from './UserInfo';
-
-import {
-  View,
-} from 'react-native';
 
 class AppContainer extends Component {
   componentWillMount() {
@@ -15,13 +12,13 @@ class AppContainer extends Component {
   }
   render() {
     if (!this.props.user || (this.props.user && !this.props.user.initialiased)) {
-      return <View />
+      return <View />;
     }
     if (this.props.user && this.props.user.initialiased && !this.props.user.id) {
-      return <LoginScreen {...this.props}/>;
+      return <LoginScreen {...this.props} />;
     }
     return (
-      <UserInfo {...this.props}/>
+      <UserInfo {...this.props} />
     );
   }
 }
@@ -32,8 +29,17 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
   return {
-    user: state.user
+    user: state.user,
   };
 }
+
+AppContainer.propTypes = {
+  user: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    initialiased: PropTypes.bool,
+  }),
+  getAuthenticatedUser: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
