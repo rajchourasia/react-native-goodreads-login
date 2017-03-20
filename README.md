@@ -5,6 +5,9 @@ I have chosen [Goodreads](https://www.goodreads.com) platform as it does not hav
 
 This same code (with modifications) can be used for authentication and API calls with any other OAuth based third party platform.
 
+## Config
+Enter Goodreads consumer_key and consumer_secret in config/goodreads.js. Thats it.
+
 ## Features
 * Third Party OAuth integration (Goodreads)
 * API calls handling XML and Json response data
